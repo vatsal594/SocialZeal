@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Star, Quote, ArrowLeft, ArrowRight } from "lucide-react";
-import "./Testimonials.css";
+import {
+  Star,
+  Quote,
+  ArrowLeft,
+  ArrowRight,
+  Award,
+  TrendingUp,
+  Users,
+  Heart,
+  ChevronRight,
+  ChevronLeft,
+} from "lucide-react";
 
 const Testimonials = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   const testimonials = [
     {
@@ -14,7 +26,7 @@ const Testimonials = () => {
       position: "CEO, TechStart",
       company: "TechStart Inc.",
       avatar:
-        "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       rating: 5,
       text: "SocialZeal transformed our social media presence completely. We saw a 300% increase in followers and 5x more engagement. Their strategic approach and creative content have been game-changing for our brand.",
       stats: { followers: "+300%", engagement: "+500%", reach: "+400%" },
@@ -25,7 +37,7 @@ const Testimonials = () => {
       position: "Marketing Director",
       company: "Fashion Forward",
       avatar:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       rating: 5,
       text: "The team at SocialZeal is incredibly professional and creative. They understood our brand perfectly and delivered results that exceeded our expectations. Our social media ROI has never been better.",
       stats: { followers: "+250%", engagement: "+350%", reach: "+300%" },
@@ -36,34 +48,84 @@ const Testimonials = () => {
       position: "Founder",
       company: "FitLife Wellness",
       avatar:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       rating: 5,
       text: "Working with SocialZeal has been an absolute pleasure. Their content creation is top-notch and their community management skills are exceptional. We've built a loyal following that truly engages with our brand.",
       stats: { followers: "+400%", engagement: "+600%", reach: "+450%" },
     },
-    // {
-    //   id: 4,
-    //   name: "David Thompson",
-    //   position: "Owner",
-    //   company: "Urban Eats",
-    //   avatar:
-    //     "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
-    //   rating: 5,
-    //   text: "SocialZeal helped us establish a strong social media presence for our restaurant chain. Their local marketing strategies and community engagement tactics have brought us countless new customers.",
-    //   stats: { followers: "+180%", engagement: "+220%", reach: "+200%" },
-    // },
-    // {
-    //   id: 5,
-    //   name: "Lisa Wang",
-    //   position: "Digital Marketing Manager",
-    //   company: "EduTech Solutions",
-    //   avatar:
-    //     "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
-    //   rating: 5,
-    //   text: "The educational content series SocialZeal created for us has been incredibly successful. Their understanding of our audience and ability to create engaging, informative content is outstanding.",
-    //   stats: { followers: "+280%", engagement: "+420%", reach: "+350%" },
-    // },
+    {
+      id: 4,
+      name: "David Kim",
+      position: "Brand Manager",
+      company: "Urban Eats",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      rating: 5,
+      text: "The results speak for themselves. SocialZeal helped us increase our social media conversion rate by 200% while reducing our ad spend. Their data-driven approach is truly impressive.",
+      stats: { followers: "+350%", engagement: "+450%", reach: "+380%" },
+    },
   ];
+
+  const stats = [
+    { icon: Users, value: "500+", label: "Happy Clients" },
+    { icon: Award, value: "95%", label: "Client Retention" },
+    { icon: TrendingUp, value: "300%", label: "Avg. Growth" },
+    { icon: Heart, value: "98%", label: "Satisfaction Rate" },
+  ];
+
+  const trustedCompanies = [
+    "Google",
+    "Microsoft",
+    "Amazon",
+    "Netflix",
+    "Spotify",
+    "Adobe",
+    "Apple",
+    "Facebook",
+    "Twitter",
+    "Tesla",
+    "Uber",
+    "Airbnb",
+  ];
+
+  useEffect(() => {
+    let interval;
+    if (isAutoPlaying && inView) {
+      interval = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+      }, 5000);
+    }
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, inView, testimonials.length]);
+
+  const nextTestimonial = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    setIsAutoPlaying(false);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentIndex(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
+    setIsAutoPlaying(false);
+  };
+
+  const goToTestimonial = (index) => {
+    setCurrentIndex(index);
+    setIsAutoPlaying(false);
+  };
+
+  const renderStars = (rating) => {
+    return Array.from({ length: 5 }).map((_, i) => (
+      <Star
+        key={i}
+        size={18}
+        className={
+          i < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+        }
+      />
+    ));
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -81,158 +143,163 @@ const Testimonials = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.5,
+        ease: "easeOut",
       },
     },
   };
 
-  const renderStars = (rating) => {
-    return [...Array(rating)].map((_, index) => (
-      <Star key={index} className="testimonial-star" size={20} />
-    ));
-  };
-
   return (
-    <motion.section
-      id="testimonials"
-      className="testimonials-section"
-      ref={ref}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
+    <section id="testimonials" className="testimonials-section" ref={ref}>
       <div className="testimonials-container">
+        {/* Header */}
         <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
           className="testimonials-header"
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          variants={containerVariants}
         >
-          <motion.div variants={itemVariants} className="testimonials-badge">
-            <span className="testimonials-badge-dot"></span>
+          <motion.div className="section-badge" variants={itemVariants}>
             Client Testimonials
           </motion.div>
 
-          <motion.h2 variants={itemVariants} className="testimonials-title">
-            What Our <span className="text-gradient-primary">Clients</span> Say
+          <motion.h2 className="section-title" variants={itemVariants}>
+            What Our <span className="text-gradient">Clients</span> Say
           </motion.h2>
 
-          <motion.p variants={itemVariants} className="testimonials-subtitle">
+          <motion.p className="section-description" variants={itemVariants}>
             Don't just take our word for it. Here's what our clients have to say
             about their experience working with SocialZeal.
           </motion.p>
         </motion.div>
 
-        {/* Overall Rating */}
+        {/* Stats */}
         <motion.div
+          className="stats-grid"
           initial="hidden"
-          animate="visible"
+          animate={inView ? "visible" : "hidden"}
           variants={containerVariants}
-          className="testimonials-rating"
         >
-          <motion.div
-            variants={itemVariants}
-            className="testimonials-rating-card"
-          >
-            <div className="testimonials-stars">{renderStars(5)}</div>
-            <h3 className="testimonials-rating-title">4.9/5 Average Rating</h3>
-            <p className="testimonials-rating-subtitle">
-              Based on 200+ client reviews
-            </p>
-          </motion.div>
+          {stats.map((stat, index) => {
+            const Icon = stat.icon;
+            return (
+              <motion.div
+                key={index}
+                className="stat-card"
+                variants={itemVariants}
+                whileHover={{ y: -5 }}
+              >
+                <div className="stat-icon">
+                  <Icon size={24} />
+                </div>
+                <div className="stat-content">
+                  <div className="stat-value">{stat.value}</div>
+                  <div className="stat-label">{stat.label}</div>
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
-        {/* Testimonials Grid */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-          className="testimonials-grid"
-        >
-          {testimonials.map((testimonial) => (
+        {/* Testimonial Carousel */}
+        <div className="testimonial-carousel">
+          <div className="carousel-wrapper">
             <motion.div
-              key={testimonial.id}
-              variants={itemVariants}
-              whileHover={{ y: -10 }}
+              key={currentIndex}
               className="testimonial-card"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.5 }}
             >
-              {/* Quote Icon */}
-              <div className="testimonial-header">
-                <Quote className="testimonial-quote" size={32} />
-                <div className="testimonial-stars">
-                  {renderStars(testimonial.rating)}
-                </div>
+              <Quote className="quote-icon" />
+              <div className="testimonial-rating">
+                {renderStars(testimonials[currentIndex].rating)}
               </div>
+              <p className="testimonial-text">
+                "{testimonials[currentIndex].text}"
+              </p>
 
-              {/* Testimonial Text */}
-              <p className="testimonial-text">"{testimonial.text}"</p>
-
-              {/* Stats */}
               <div className="testimonial-stats">
-                {Object.entries(testimonial.stats).map(([key, value]) => (
-                  <div key={key} className="testimonial-stat">
-                    <div className="testimonial-stat-value">{value}</div>
-                    <div className="testimonial-stat-label">{key}</div>
-                  </div>
-                ))}
+                {Object.entries(testimonials[currentIndex].stats).map(
+                  ([key, value]) => (
+                    <div key={key} className="stat-item">
+                      <div className="stat-value">{value}</div>
+                      <div className="stat-label">{key}</div>
+                    </div>
+                  )
+                )}
               </div>
 
-              {/* Client Info */}
-              <div className="testimonial-client">
+              <div className="testimonial-author">
                 <img
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  className="testimonial-avatar"
+                  src={testimonials[currentIndex].avatar}
+                  alt={testimonials[currentIndex].name}
+                  className="author-avatar"
                 />
-                <div className="testimonial-client-info">
-                  <div className="testimonial-client-name">
-                    {testimonial.name}
+                <div className="author-info">
+                  <div className="author-name">
+                    {testimonials[currentIndex].name}
                   </div>
-                  <div className="testimonial-client-position">
-                    {testimonial.position}
+                  <div className="author-position">
+                    {testimonials[currentIndex].position}
                   </div>
-                  <div className="testimonial-client-company">
-                    {testimonial.company}
+                  <div className="author-company">
+                    {testimonials[currentIndex].company}
                   </div>
                 </div>
               </div>
             </motion.div>
-          ))}
-        </motion.div>
+          </div>
 
-        {/* CTA Section */}
+          {/* Carousel Controls */}
+          <div className="carousel-controls">
+            <button className="control-btn" onClick={prevTestimonial}>
+              <ChevronLeft size={20} />
+            </button>
+
+            <div className="carousel-dots">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  className={`dot ${index === currentIndex ? "active" : ""}`}
+                  onClick={() => goToTestimonial(index)}
+                />
+              ))}
+            </div>
+
+            <button className="control-btn" onClick={nextTestimonial}>
+              <ChevronRight size={20} />
+            </button>
+          </div>
+        </div>
+
+        {/* Trusted Companies */}
         <motion.div
+          className="trusted-companies"
           initial="hidden"
-          animate="visible"
+          animate={inView ? "visible" : "hidden"}
           variants={containerVariants}
-          className="testimonials-cta"
         >
-          {/* <motion.div
-            variants={itemVariants}
-            className="testimonials-cta-content"
-          >
-            <h3 className="testimonials-cta-title">
-              Ready to Join Our Success Stories?
-            </h3>
-            <p className="testimonials-cta-subtitle">
-              Let's work together to create your own success story.
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn btn-primary"
-              onClick={() =>
-                document
-                  .getElementById("contact")
-                  .scrollIntoView({ behavior: "smooth" })
-              }
-            >
-              Get Started Today
-            </motion.button>
-          </motion.div> */}
+          <motion.p className="trusted-title" variants={itemVariants}>
+            Trusted by industry leaders
+          </motion.p>
+
+          <div className="companies-grid">
+            {trustedCompanies.map((company, index) => (
+              <motion.div
+                key={index}
+                className="company-item"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+              >
+                {company}
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 
