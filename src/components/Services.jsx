@@ -67,59 +67,59 @@ const Services = () => {
       ],
       color: "from-green-500 to-emerald-500",
     },
-    {
-      icon: (
-        <Lottie animationData={adsAnim} loop={true} style={{ height: 48 }} />
-      ),
-      title: "Paid Advertising",
-      description:
-        "Strategic paid social media campaigns to boost your reach, engagement, and conversions.",
-      features: [
-        "Campaign Strategy",
-        "Ad Creative",
-        "Budget Management",
-        "A/B Testing",
-      ],
-      color: "from-orange-500 to-red-500",
-    },
-    {
-      icon: (
-        <Lottie
-          animationData={communityAnim}
-          loop={true}
-          style={{ height: 48 }}
-        />
-      ),
-      title: "Community Management",
-      description:
-        "Building and nurturing your online community through authentic engagement and relationship building.",
-      features: [
-        "Comment Management",
-        "Influencer Outreach",
-        "Brand Advocacy",
-        "Crisis Communication",
-      ],
-      color: "from-purple-500 to-pink-500",
-    },
-    {
-      icon: (
-        <Lottie
-          animationData={strategyAnim}
-          loop={true}
-          style={{ height: 48 }}
-        />
-      ),
-      title: "Social Media Strategy",
-      description:
-        "Comprehensive social media strategy development aligned with your business goals and target audience.",
-      features: [
-        "Audience Research",
-        "Platform Strategy",
-        "Content Calendar",
-        "Growth Planning",
-      ],
-      color: "from-yellow-500 to-orange-500",
-    },
+    // {
+    //   icon: (
+    //     <Lottie animationData={adsAnim} loop={true} style={{ height: 48 }} />
+    //   ),
+    //   title: "Paid Advertising",
+    //   description:
+    //     "Strategic paid social media campaigns to boost your reach, engagement, and conversions.",
+    //   features: [
+    //     "Campaign Strategy",
+    //     "Ad Creative",
+    //     "Budget Management",
+    //     "A/B Testing",
+    //   ],
+    //   color: "from-orange-500 to-red-500",
+    // },
+    // {
+    //   icon: (
+    //     <Lottie
+    //       animationData={communityAnim}
+    //       loop={true}
+    //       style={{ height: 48 }}
+    //     />
+    //   ),
+    //   title: "Community Management",
+    //   description:
+    //     "Building and nurturing your online community through authentic engagement and relationship building.",
+    //   features: [
+    //     "Comment Management",
+    //     "Influencer Outreach",
+    //     "Brand Advocacy",
+    //     "Crisis Communication",
+    //   ],
+    //   color: "from-purple-500 to-pink-500",
+    // },
+    // {
+    //   icon: (
+    //     <Lottie
+    //       animationData={strategyAnim}
+    //       loop={true}
+    //       style={{ height: 48 }}
+    //     />
+    //   ),
+    //   title: "Social Media Strategy",
+    //   description:
+    //     "Comprehensive social media strategy development aligned with your business goals and target audience.",
+    //   features: [
+    //     "Audience Research",
+    //     "Platform Strategy",
+    //     "Content Calendar",
+    //     "Growth Planning",
+    //   ],
+    //   color: "from-yellow-500 to-orange-500",
+    // },
   ];
 
   const containerVariants = {
@@ -254,7 +254,7 @@ const Services = () => {
           variants={containerVariants}
           className="services-cta"
         >
-          <motion.div variants={itemVariants} className="services-cta-content">
+          {/* <motion.div variants={itemVariants} className="services-cta-content">
             <h3 className="services-cta-title">
               Ready to Transform Your Social Media?
             </h3>
@@ -273,7 +273,7 @@ const Services = () => {
             >
               Get Started Today
             </motion.button>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
       </div>
     </motion.section>

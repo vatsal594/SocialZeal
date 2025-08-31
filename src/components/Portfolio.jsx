@@ -63,39 +63,39 @@ const Portfolio = () => {
       stats: { followers: "80K+", engagement: "15%", reach: "3M+" },
       platforms: [Facebook, Instagram],
     },
-    {
-      id: 4,
-      category: "strategy",
-      title: "Restaurant Social Strategy",
-      description:
-        "Complete social media strategy and community management for a local restaurant chain.",
-      image:
-        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      stats: { followers: "25K+", engagement: "18%", reach: "1M+" },
-      platforms: [Instagram, Facebook],
-    },
-    {
-      id: 5,
-      category: "social",
-      title: "Fitness Brand Campaign",
-      description:
-        "Motivational social media campaign for a fitness and wellness brand.",
-      image:
-        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      stats: { followers: "90K+", engagement: "10%", reach: "4M+" },
-      platforms: [Instagram, Youtube, Twitter],
-    },
-    {
-      id: 6,
-      category: "content",
-      title: "Educational Content Series",
-      description:
-        "Educational content series for a professional development platform.",
-      image:
-        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      stats: { followers: "60K+", engagement: "14%", reach: "2.5M+" },
-      platforms: [Linkedin, Twitter, Youtube],
-    },
+    // {
+    //   id: 4,
+    //   category: "strategy",
+    //   title: "Restaurant Social Strategy",
+    //   description:
+    //     "Complete social media strategy and community management for a local restaurant chain.",
+    //   image:
+    //     "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    //   stats: { followers: "25K+", engagement: "18%", reach: "1M+" },
+    //   platforms: [Instagram, Facebook],
+    // },
+    // {
+    //   id: 5,
+    //   category: "social",
+    //   title: "Fitness Brand Campaign",
+    //   description:
+    //     "Motivational social media campaign for a fitness and wellness brand.",
+    //   image:
+    //     "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    //   stats: { followers: "90K+", engagement: "10%", reach: "4M+" },
+    //   platforms: [Instagram, Youtube, Twitter],
+    // },
+    // {
+    //   id: 6,
+    //   category: "content",
+    //   title: "Educational Content Series",
+    //   description:
+    //     "Educational content series for a professional development platform.",
+    //   image:
+    //     "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    //   stats: { followers: "60K+", engagement: "14%", reach: "2.5M+" },
+    //   platforms: [Linkedin, Twitter, Youtube],
+    // },
   ];
 
   const filteredProjects =
@@ -248,7 +248,7 @@ const Portfolio = () => {
           variants={containerVariants}
           className="portfolio-cta"
         >
-          <motion.div variants={itemVariants} className="portfolio-cta-content">
+          {/* <motion.div variants={itemVariants} className="portfolio-cta-content">
             <h3 className="portfolio-cta-title">
               Ready to See Your Success Story?
             </h3>
@@ -268,7 +268,7 @@ const Portfolio = () => {
             >
               Start Your Project
             </motion.button>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
       </div>
     </motion.section>

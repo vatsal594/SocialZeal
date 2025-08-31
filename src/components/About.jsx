@@ -45,7 +45,7 @@ const About = () => {
 
   const achievements = [
     { number: "5+", label: "Years Experience" },
-    { number: "200+", label: "Happy Clients" },
+    { number: "500+", label: "Happy Clients" },
     { number: "500+", label: "Successful Campaigns" },
     { number: "95%", label: "Client Retention" },
   ];
@@ -112,7 +112,7 @@ const About = () => {
                 "Strategic social media planning and execution",
                 "Creative content creation and design",
                 "Community management and engagement",
-                "Paid advertising and campaign optimization",
+                // "Paid advertising and campaign optimization",
                 "Analytics and performance reporting",
               ].map((feature, index) => (
                 <div key={index} className="about-feature">
@@ -145,7 +145,7 @@ const About = () => {
           >
             <div className="about-right-content">
               {/* Mission Statement */}
-              <motion.div variants={itemVariants} className="about-mission">
+              {/* <motion.div variants={itemVariants} className="about-mission">
                 <div className="about-mission-header">
                   <div className="about-mission-icon">
                     <Target className="text-white" size={24} />
@@ -157,7 +157,7 @@ const About = () => {
                   that drive real growth, meaningful engagement, and lasting
                   brand relationships in the digital age.
                 </p>
-              </motion.div>
+              </motion.div> */}
 
               {/* Values Grid */}
               <div className="about-values-grid">
@@ -196,10 +196,10 @@ const About = () => {
                 </p>
                 <div className="about-team-stats">
                   {[
-                    { number: "15+", label: "Team Members" },
-                    { number: "50+", label: "Industries Served" },
+                    { number: "5+", label: "Experts Onboard" },
+                    { number: "40+", label: "Projects Delivered" },
                     { number: "24/7", label: "Support Available" },
-                    { number: "100%", label: "Client Focus" },
+                    { number: "100%", label: "Happy Clients" },
                   ].map((stat, index) => (
                     <div key={index} className="about-team-stat">
                       <div className="about-team-stat-number">

@@ -19,18 +19,18 @@ const Hero = () => {
     {
       icon: TrendingUp,
       value: "500+",
-      label: "Campaigns",
+      label: "Shoots & Edits",
       color: "from-purple-500 to-pink-500",
     },
     {
       icon: Users,
-      value: "200+",
+      value: "500+",
       label: "Happy Clients",
       color: "from-blue-500 to-cyan-500",
     },
     {
       icon: Target,
-      value: "95%",
+      value: "100%",
       label: "Success Rate",
       color: "from-green-500 to-emerald-500",
     },

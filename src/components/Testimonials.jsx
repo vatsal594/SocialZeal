@@ -41,28 +41,28 @@ const Testimonials = () => {
       text: "Working with SocialZeal has been an absolute pleasure. Their content creation is top-notch and their community management skills are exceptional. We've built a loyal following that truly engages with our brand.",
       stats: { followers: "+400%", engagement: "+600%", reach: "+450%" },
     },
-    {
-      id: 4,
-      name: "David Thompson",
-      position: "Owner",
-      company: "Urban Eats",
-      avatar:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
-      rating: 5,
-      text: "SocialZeal helped us establish a strong social media presence for our restaurant chain. Their local marketing strategies and community engagement tactics have brought us countless new customers.",
-      stats: { followers: "+180%", engagement: "+220%", reach: "+200%" },
-    },
-    {
-      id: 5,
-      name: "Lisa Wang",
-      position: "Digital Marketing Manager",
-      company: "EduTech Solutions",
-      avatar:
-        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
-      rating: 5,
-      text: "The educational content series SocialZeal created for us has been incredibly successful. Their understanding of our audience and ability to create engaging, informative content is outstanding.",
-      stats: { followers: "+280%", engagement: "+420%", reach: "+350%" },
-    },
+    // {
+    //   id: 4,
+    //   name: "David Thompson",
+    //   position: "Owner",
+    //   company: "Urban Eats",
+    //   avatar:
+    //     "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+    //   rating: 5,
+    //   text: "SocialZeal helped us establish a strong social media presence for our restaurant chain. Their local marketing strategies and community engagement tactics have brought us countless new customers.",
+    //   stats: { followers: "+180%", engagement: "+220%", reach: "+200%" },
+    // },
+    // {
+    //   id: 5,
+    //   name: "Lisa Wang",
+    //   position: "Digital Marketing Manager",
+    //   company: "EduTech Solutions",
+    //   avatar:
+    //     "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+    //   rating: 5,
+    //   text: "The educational content series SocialZeal created for us has been incredibly successful. Their understanding of our audience and ability to create engaging, informative content is outstanding.",
+    //   stats: { followers: "+280%", engagement: "+420%", reach: "+350%" },
+    // },
   ];
 
   const containerVariants = {
@@ -207,7 +207,7 @@ const Testimonials = () => {
           variants={containerVariants}
           className="testimonials-cta"
         >
-          <motion.div
+          {/* <motion.div
             variants={itemVariants}
             className="testimonials-cta-content"
           >
@@ -229,7 +229,7 @@ const Testimonials = () => {
             >
               Get Started Today
             </motion.button>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
       </div>
     </motion.section>

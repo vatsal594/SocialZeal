@@ -313,7 +313,7 @@ const Contact = () => {
         </div>
 
         {/* CTA Section */}
-        <motion.div
+        {/* <motion.div
           ref={ref}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -361,7 +361,7 @@ const Contact = () => {
               </motion.button>
             </motion.div>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </motion.section>
   );
