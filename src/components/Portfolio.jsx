@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import {
   Instagram,
@@ -13,20 +13,24 @@ import {
   Eye,
   Heart,
   MessageCircle,
+  ArrowRight,
+  ExternalLink,
+  Filter,
+  X,
 } from "lucide-react";
 import "./Portfolio.css";
 
 const Portfolio = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
-
   const [activeFilter, setActiveFilter] = useState("all");
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const filters = [
-    { id: "all", label: "All Work" },
-    { id: "social", label: "Social Media" },
-    { id: "content", label: "Content Creation" },
-    { id: "ads", label: "Paid Advertising" },
-    { id: "strategy", label: "Strategy" },
+    { id: "all", label: "All Work", icon: Filter },
+    { id: "social", label: "Social Media", icon: Users },
+    { id: "content", label: "Content Creation", icon: MessageCircle },
+    { id: "ads", label: "Paid Advertising", icon: TrendingUp },
+    { id: "strategy", label: "Strategy", icon: Target },
   ];
 
   const projects = [
@@ -35,67 +39,85 @@ const Portfolio = () => {
       category: "social",
       title: "TechStart Social Media Campaign",
       description:
-        "Complete social media transformation for a tech startup, resulting in 300% follower growth.",
+        "Complete social media transformation for a tech startup, resulting in 300% follower growth and increased engagement across all platforms.",
       image:
         "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
       stats: { followers: "50K+", engagement: "8.5%", reach: "2M+" },
       platforms: [Instagram, Facebook, Twitter],
+      duration: "3 months",
+      results: "300% growth in followers, 150% increase in engagement",
+      client: "TechStart Inc.",
     },
     {
       id: 2,
       category: "content",
       title: "Fashion Brand Content Strategy",
       description:
-        "Creative content creation and visual storytelling for a luxury fashion brand.",
+        "Creative content creation and visual storytelling for a luxury fashion brand, establishing a strong brand identity and increasing conversions.",
       image:
         "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
       stats: { followers: "120K+", engagement: "12%", reach: "5M+" },
       platforms: [Instagram, Youtube],
+      duration: "6 months",
+      results: "200% increase in brand awareness, 75% higher conversion rate",
+      client: "Luxe Fashion House",
     },
     {
       id: 3,
       category: "ads",
       title: "E-commerce Paid Campaign",
       description:
-        "High-converting paid advertising campaign for an e-commerce store.",
+        "High-converting paid advertising campaign for an e-commerce store that dramatically increased ROI and customer acquisition.",
       image:
         "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
       stats: { followers: "80K+", engagement: "15%", reach: "3M+" },
       platforms: [Facebook, Instagram],
+      duration: "4 months",
+      results: "320% ROI, 40% lower customer acquisition cost",
+      client: "StyleShop E-commerce",
     },
-    // {
-    //   id: 4,
-    //   category: "strategy",
-    //   title: "Restaurant Social Strategy",
-    //   description:
-    //     "Complete social media strategy and community management for a local restaurant chain.",
-    //   image:
-    //     "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    //   stats: { followers: "25K+", engagement: "18%", reach: "1M+" },
-    //   platforms: [Instagram, Facebook],
-    // },
-    // {
-    //   id: 5,
-    //   category: "social",
-    //   title: "Fitness Brand Campaign",
-    //   description:
-    //     "Motivational social media campaign for a fitness and wellness brand.",
-    //   image:
-    //     "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    //   stats: { followers: "90K+", engagement: "10%", reach: "4M+" },
-    //   platforms: [Instagram, Youtube, Twitter],
-    // },
-    // {
-    //   id: 6,
-    //   category: "content",
-    //   title: "Educational Content Series",
-    //   description:
-    //     "Educational content series for a professional development platform.",
-    //   image:
-    //     "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    //   stats: { followers: "60K+", engagement: "14%", reach: "2.5M+" },
-    //   platforms: [Linkedin, Twitter, Youtube],
-    // },
+    {
+      id: 4,
+      category: "strategy",
+      title: "Corporate Social Media Strategy",
+      description:
+        "Comprehensive social media strategy for a Fortune 500 company, aligning all platforms with brand values and business objectives.",
+      image:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      stats: { followers: "200K+", engagement: "9.2%", reach: "8M+" },
+      platforms: [Linkedin, Twitter, Facebook],
+      duration: "8 months",
+      results: "Unified brand voice, 40% increase in B2B leads",
+      client: "Global Corporation",
+    },
+    {
+      id: 5,
+      category: "social",
+      title: "Restaurant Social Media Management",
+      description:
+        "Complete social media management for a restaurant chain, increasing foot traffic and customer loyalty through engaging content.",
+      image:
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      stats: { followers: "45K+", engagement: "18%", reach: "1.5M+" },
+      platforms: [Instagram, Facebook],
+      duration: "5 months",
+      results: "25% increase in reservations, 60% growth in local engagement",
+      client: "Urban Eats Restaurant",
+    },
+    {
+      id: 6,
+      category: "content",
+      title: "Health Brand Content Series",
+      description:
+        "Educational content series for a health and wellness brand, establishing thought leadership and building a loyal community.",
+      image:
+        "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      stats: { followers: "95K+", engagement: "14%", reach: "4M+" },
+      platforms: [Instagram, Youtube, Facebook],
+      duration: "7 months",
+      results: "50% increase in newsletter signups, 35% higher product sales",
+      client: "Wellness Life Co.",
+    },
   ];
 
   const filteredProjects =
@@ -114,14 +136,35 @@ const Portfolio = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
+        ease: "easeOut",
       },
     },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const openProjectDetail = (project) => {
+    setSelectedProject(project);
+  };
+
+  const closeProjectDetail = () => {
+    setSelectedProject(null);
   };
 
   return (
@@ -130,27 +173,34 @@ const Portfolio = () => {
       className="portfolio-section"
       ref={ref}
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      animate={inView ? { opacity: 1 } : { opacity: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
     >
+      {/* Background Elements */}
+      <div className="portfolio-background">
+        <div className="portfolio-orb orb-1"></div>
+        <div className="portfolio-orb orb-2"></div>
+        <div className="portfolio-orb orb-3"></div>
+        <div className="portfolio-grid-pattern"></div>
+      </div>
+
       <div className="portfolio-container">
         <motion.div
           initial="hidden"
-          animate="visible"
+          animate={inView ? "visible" : "hidden"}
           variants={containerVariants}
           className="portfolio-header"
         >
-          <motion.div variants={itemVariants} className="portfolio-badge">
-            <span className="portfolio-badge-dot"></span>
+          <motion.div variants={itemVariants} className="section-badge">
+            <span className="badge-dot"></span>
             Our Portfolio
           </motion.div>
 
-          <motion.h2 variants={itemVariants} className="portfolio-title">
-            Success <span className="text-gradient-primary">Stories</span> &
-            Case Studies
+          <motion.h2 variants={itemVariants} className="section-title">
+            Success <span className="text-gradient">Stories</span> & Case Studies
           </motion.h2>
 
-          <motion.p variants={itemVariants} className="portfolio-subtitle">
+          <motion.p variants={itemVariants} className="section-description">
             Discover how we've helped brands transform their social media
             presence and achieve remarkable growth through strategic campaigns.
           </motion.p>
@@ -159,107 +209,185 @@ const Portfolio = () => {
         {/* Filter Buttons */}
         <motion.div
           initial="hidden"
-          animate="visible"
+          animate={inView ? "visible" : "hidden"}
           variants={containerVariants}
           className="portfolio-filters"
         >
-          {filters.map((filter) => (
-            <motion.button
-              key={filter.id}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveFilter(filter.id)}
-              className={`portfolio-filter-button ${
-                activeFilter === filter.id ? "active" : ""
-              }`}
-            >
-              {filter.label}
-            </motion.button>
-          ))}
+          {filters.map((filter) => {
+            const FilterIcon = filter.icon;
+            return (
+              <motion.button
+                key={filter.id}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setActiveFilter(filter.id)}
+                className={`filter-button ${activeFilter === filter.id ? "active" : ""}`}
+              >
+                <FilterIcon size={16} />
+                <span>{filter.label}</span>
+              </motion.button>
+            );
+          })}
         </motion.div>
 
         {/* Projects Grid */}
         <motion.div
           initial="hidden"
-          animate="visible"
+          animate={inView ? "visible" : "hidden"}
           variants={containerVariants}
           className="portfolio-grid"
         >
           {filteredProjects.map((project) => (
             <motion.div
               key={project.id}
-              variants={itemVariants}
+              variants={cardVariants}
               className="portfolio-card"
+              whileHover={{ y: -10 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => openProjectDetail(project)}
             >
-              <div className="portfolio-image-container">
+              <div className="card-image-container">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="portfolio-image"
+                  className="card-image"
                 />
-                <div className="portfolio-overlay">
-                  <div className="portfolio-overlay-content">
-                    <div className="portfolio-platforms">
+                <div className="card-overlay">
+                  <div className="overlay-content">
+                    <div className="platforms">
                       {project.platforms.map((Platform, index) => (
-                        <Platform
-                          key={index}
-                          className="portfolio-platform-icon"
-                          size={20}
-                        />
+                        <div key={index} className="platform-icon">
+                          <Platform size={18} />
+                        </div>
                       ))}
                     </div>
-                    <div className="portfolio-stats">
-                      <div className="portfolio-stat">
-                        <span className="portfolio-stat-value">
-                          {project.stats.followers}
-                        </span>
-                        <span className="portfolio-stat-label">Followers</span>
-                      </div>
-                      <div className="portfolio-stat">
-                        <span className="portfolio-stat-value">
-                          {project.stats.engagement}
-                        </span>
-                        <span className="portfolio-stat-label">Engagement</span>
-                      </div>
-                      <div className="portfolio-stat">
-                        <span className="portfolio-stat-value">
-                          {project.stats.reach}
-                        </span>
-                        <span className="portfolio-stat-label">Reach</span>
-                      </div>
-                    </div>
+                    <button className="view-project-btn">
+                      <Eye size={18} />
+                      View Project
+                    </button>
                   </div>
                 </div>
               </div>
 
-              <div className="portfolio-content">
-                <h3 className="portfolio-title">{project.title}</h3>
-                <p className="portfolio-description">{project.description}</p>
+              <div className="card-content">
+                <h3 className="card-title">{project.title}</h3>
+                <p className="card-description">{project.description}</p>
+                
+                <div className="card-stats">
+                  {Object.entries(project.stats).map(([key, value]) => (
+                    <div key={key} className="stat-item">
+                      <div className="stat-value">{value}</div>
+                      <div className="stat-label">{key}</div>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="card-footer">
+                  <span className="card-category">{project.category}</span>
+                  <ArrowRight size={18} />
+                </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
 
+        {/* Project Detail Modal */}
+        <AnimatePresence>
+          {selectedProject && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="project-modal"
+              onClick={closeProjectDetail}
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="modal-content"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button className="modal-close" onClick={closeProjectDetail}>
+                  <X size={24} />
+                </button>
+                
+                <div className="modal-image">
+                  <img src={selectedProject.image} alt={selectedProject.title} />
+                </div>
+                
+                <div className="modal-body">
+                  <div className="modal-header">
+                    <h2>{selectedProject.title}</h2>
+                    <p className="modal-client">{selectedProject.client}</p>
+                  </div>
+                  
+                  <div className="modal-details">
+                    <div className="detail-item">
+                      <span className="detail-label">Duration</span>
+                      <span className="detail-value">{selectedProject.duration}</span>
+                    </div>
+                    
+                    <div className="detail-item">
+                      <span className="detail-label">Platforms</span>
+                      <div className="platforms">
+                        {selectedProject.platforms.map((Platform, index) => (
+                          <div key={index} className="platform-icon">
+                            <Platform size={18} />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div className="detail-item">
+                      <span className="detail-label">Results</span>
+                      <span className="detail-value">{selectedProject.results}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="modal-stats">
+                    {Object.entries(selectedProject.stats).map(([key, value]) => (
+                      <div key={key} className="modal-stat">
+                        <div className="modal-stat-value">{value}</div>
+                        <div className="modal-stat-label">{key}</div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <p className="modal-description">{selectedProject.description}</p>
+                  
+                  <div className="modal-actions">
+                    <button className="btn-primary">
+                      <ExternalLink size={18} />
+                      View Live Project
+                    </button>
+                    <button className="btn-secondary" onClick={closeProjectDetail}>
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* CTA Section */}
         <motion.div
           initial="hidden"
-          animate="visible"
+          animate={inView ? "visible" : "hidden"}
           variants={containerVariants}
           className="portfolio-cta"
         >
-          {/* <motion.div variants={itemVariants} className="portfolio-cta-content">
-            <h3 className="portfolio-cta-title">
-              Ready to See Your Success Story?
-            </h3>
-            <p className="portfolio-cta-subtitle">
-              Let's create a social media strategy that delivers real results
-              for your brand.
+          <motion.div variants={itemVariants} className="cta-content">
+            <h3 className="cta-title">Ready to Create Your Success Story?</h3>
+            <p className="cta-description">
+              Let's work together to build a social media presence that drives real results for your brand.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="btn btn-primary"
+              className="cta-button"
               onClick={() =>
                 document
                   .getElementById("contact")
@@ -267,8 +395,9 @@ const Portfolio = () => {
               }
             >
               Start Your Project
+              <ArrowRight size={20} />
             </motion.button>
-          </motion.div> */}
+          </motion.div>
         </motion.div>
       </div>
     </motion.section>
