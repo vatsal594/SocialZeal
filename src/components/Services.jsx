@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Lottie from "lottie-react";
@@ -11,7 +11,8 @@ import strategyAnim from "../assets/lottie/strategy.json";
 import "./Services.css";
 
 const Services = () => {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [activeService, setActiveService] = useState(null);
 
   const services = [
     {
@@ -28,6 +29,7 @@ const Services = () => {
         "Crisis Management",
       ],
       color: "from-pink-500 to-purple-500",
+      gradient: "linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)",
     },
     {
       icon: (
@@ -47,6 +49,7 @@ const Services = () => {
         "Brand Consistency",
       ],
       color: "from-blue-500 to-cyan-500",
+      gradient: "linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%)",
     },
     {
       icon: (
@@ -66,60 +69,64 @@ const Services = () => {
         "Custom Reports",
       ],
       color: "from-green-500 to-emerald-500",
+      gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
     },
-    // {
-    //   icon: (
-    //     <Lottie animationData={adsAnim} loop={true} style={{ height: 48 }} />
-    //   ),
-    //   title: "Paid Advertising",
-    //   description:
-    //     "Strategic paid social media campaigns to boost your reach, engagement, and conversions.",
-    //   features: [
-    //     "Campaign Strategy",
-    //     "Ad Creative",
-    //     "Budget Management",
-    //     "A/B Testing",
-    //   ],
-    //   color: "from-orange-500 to-red-500",
-    // },
-    // {
-    //   icon: (
-    //     <Lottie
-    //       animationData={communityAnim}
-    //       loop={true}
-    //       style={{ height: 48 }}
-    //     />
-    //   ),
-    //   title: "Community Management",
-    //   description:
-    //     "Building and nurturing your online community through authentic engagement and relationship building.",
-    //   features: [
-    //     "Comment Management",
-    //     "Influencer Outreach",
-    //     "Brand Advocacy",
-    //     "Crisis Communication",
-    //   ],
-    //   color: "from-purple-500 to-pink-500",
-    // },
-    // {
-    //   icon: (
-    //     <Lottie
-    //       animationData={strategyAnim}
-    //       loop={true}
-    //       style={{ height: 48 }}
-    //     />
-    //   ),
-    //   title: "Social Media Strategy",
-    //   description:
-    //     "Comprehensive social media strategy development aligned with your business goals and target audience.",
-    //   features: [
-    //     "Audience Research",
-    //     "Platform Strategy",
-    //     "Content Calendar",
-    //     "Growth Planning",
-    //   ],
-    //   color: "from-yellow-500 to-orange-500",
-    // },
+    {
+      icon: (
+        <Lottie animationData={adsAnim} loop={true} style={{ height: 48 }} />
+      ),
+      title: "Paid Advertising",
+      description:
+        "Strategic paid social media campaigns to boost your reach, engagement, and conversions.",
+      features: [
+        "Campaign Strategy",
+        "Ad Creative",
+        "Budget Management",
+        "A/B Testing",
+      ],
+      color: "from-orange-500 to-red-500",
+      gradient: "linear-gradient(135deg, #f97316 0%, #ef4444 100%)",
+    },
+    {
+      icon: (
+        <Lottie
+          animationData={communityAnim}
+          loop={true}
+          style={{ height: 48 }}
+        />
+      ),
+      title: "Community Management",
+      description:
+        "Building and nurturing your online community through authentic engagement and relationship building.",
+      features: [
+        "Comment Management",
+        "Influencer Outreach",
+        "Brand Advocacy",
+        "Crisis Communication",
+      ],
+      color: "from-purple-500 to-pink-500",
+      gradient: "linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)",
+    },
+    {
+      icon: (
+        <Lottie
+          animationData={strategyAnim}
+          loop={true}
+          style={{ height: 48 }}
+        />
+      ),
+      title: "Social Media Strategy",
+      description:
+        "Comprehensive social media strategy development aligned with your business goals and target audience.",
+      features: [
+        "Audience Research",
+        "Platform Strategy",
+        "Content Calendar",
+        "Growth Planning",
+      ],
+      color: "from-yellow-500 to-orange-500",
+      gradient: "linear-gradient(135deg, #eab308 0%, #f97316 100%)",
+    },
   ];
 
   const containerVariants = {
@@ -127,18 +134,38 @@ const Services = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.15,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.7,
+        ease: [0.25, 0.1, 0.25, 1],
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+      },
+    },
+    hover: {
+      y: -15,
+      scale: 1.03,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut",
       },
     },
   };
@@ -149,13 +176,30 @@ const Services = () => {
       className="services-section"
       ref={ref}
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      animate={inView ? { opacity: 1 } : { opacity: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <div className="services-container">
+        {/* Floating Background Elements */}
+        <div className="services-floating-elements">
+          {[...Array(5)].map((_, i) => (
+            <div
+              key={i}
+              className="services-floating-element"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${i * 0.5}s`,
+                width: `${20 + Math.random() * 30}px`,
+                height: `${20 + Math.random() * 30}px`,
+              }}
+            ></div>
+          ))}
+        </div>
+
         <motion.div
           initial="hidden"
-          animate="visible"
+          animate={inView ? "visible" : "hidden"}
           variants={containerVariants}
           className="services-header"
         >
@@ -178,45 +222,87 @@ const Services = () => {
 
         <motion.div
           initial="hidden"
-          animate="visible"
+          animate={inView ? "visible" : "hidden"}
           variants={containerVariants}
           className="services-grid"
         >
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              variants={itemVariants}
-              whileHover={{ y: -10 }}
+              variants={cardVariants}
+              whileHover="hover"
               className="service-card"
+              onMouseEnter={() => setActiveService(index)}
+              onMouseLeave={() => setActiveService(null)}
+              style={{
+                background:
+                  activeService === index
+                    ? `linear-gradient(135deg, rgba(30, 30, 40, 0.8) 0%, rgba(40, 40, 60, 0.9) 100%), ${service.gradient}`
+                    : "rgba(30, 30, 40, 0.55)",
+              }}
             >
-              <div className={`service-icon bg-gradient-to-r ${service.color}`}>
-                {service.icon}
+              <div className="service-card-inner">
+                <div
+                  className={`service-icon bg-gradient-to-r ${service.color}`}
+                >
+                  {service.icon}
+                </div>
+
+                <h3 className="service-title">{service.title}</h3>
+                <p className="service-description">{service.description}</p>
+
+                <div className="service-features">
+                  {service.features.map((feature, featureIndex) => (
+                    <motion.div
+                      key={featureIndex}
+                      className="service-feature"
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 * featureIndex }}
+                    >
+                      <div className="service-feature-dot"></div>
+                      <span className="service-feature-text">{feature}</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="service-button"
+                  onClick={() =>
+                    document
+                      .getElementById("contact")
+                      .scrollIntoView({ behavior: "smooth" })
+                  }
+                  style={{
+                    background:
+                      activeService === index
+                        ? service.gradient
+                        : "transparent",
+                    borderColor:
+                      activeService === index ? "transparent" : "#667eea",
+                  }}
+                >
+                  Learn More
+                  <svg
+                    className="service-button-arrow"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5 12H19M19 12L12 5M19 12L12 19"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </motion.button>
               </div>
-
-              <h3 className="service-title">{service.title}</h3>
-              <p className="service-description">{service.description}</p>
-
-              <div className="service-features">
-                {service.features.map((feature, featureIndex) => (
-                  <div key={featureIndex} className="service-feature">
-                    <div className="service-feature-dot"></div>
-                    <span className="service-feature-text">{feature}</span>
-                  </div>
-                ))}
-              </div>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="service-button"
-                onClick={() =>
-                  document
-                    .getElementById("contact")
-                    .scrollIntoView({ behavior: "smooth" })
-                }
-              >
-                Learn More
-              </motion.button>
             </motion.div>
           ))}
         </motion.div>
@@ -224,7 +310,7 @@ const Services = () => {
         {/* Stats Section */}
         <motion.div
           initial="hidden"
-          animate="visible"
+          animate={inView ? "visible" : "hidden"}
           variants={containerVariants}
           className="services-stats"
         >
@@ -239,41 +325,13 @@ const Services = () => {
                 key={stat.label}
                 variants={itemVariants}
                 className="services-stat"
+                whileHover={{ scale: 1.05 }}
               >
                 <div className="services-stat-number">{stat.number}</div>
                 <div className="services-stat-label">{stat.label}</div>
               </motion.div>
             ))}
           </div>
-        </motion.div>
-
-        {/* CTA Section */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-          className="services-cta"
-        >
-          {/* <motion.div variants={itemVariants} className="services-cta-content">
-            <h3 className="services-cta-title">
-              Ready to Transform Your Social Media?
-            </h3>
-            <p className="services-cta-subtitle">
-              Let's discuss how we can help you achieve your social media goals.
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn btn-primary"
-              onClick={() =>
-                document
-                  .getElementById("contact")
-                  .scrollIntoView({ behavior: "smooth" })
-              }
-            >
-              Get Started Today
-            </motion.button>
-          </motion.div> */}
         </motion.div>
       </div>
     </motion.section>
