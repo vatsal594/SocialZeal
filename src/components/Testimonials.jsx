@@ -15,6 +15,11 @@ import {
 } from "lucide-react";
 import "./Testimonials.css";
 
+import googleLogo from "../assets/google.png";
+import instagramLogo from "../assets/instagram.png";
+import youtubeLogo from "../assets/youtube.png";
+import spotifyLogo from "../assets/spotify.png";
+
 const Testimonials = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -99,12 +104,26 @@ const Testimonials = () => {
   ];
 
   const trustedCompanies = [
-    { name: "Google", logo: "https://logo.clearbit.com/google.com" },
-    { name: "Microsoft", logo: "https://logo.clearbit.com/microsoft.com" },
-    { name: "Amazon", logo: "https://logo.clearbit.com/amazon.com" },
-    { name: "Netflix", logo: "https://logo.clearbit.com/netflix.com" },
-    { name: "Adobe", logo: "https://logo.clearbit.com/adobe.com" },
-    { name: "Spotify", logo: "https://logo.clearbit.com/spotify.com" },
+    {
+      name: "Google",
+      logo: googleLogo,
+      color: "bg-blue-50",
+    },
+    {
+      name: "Instagram",
+      logo: instagramLogo,
+      color: "bg-pink-50",
+    },
+    {
+      name: "YouTube",
+      logo: youtubeLogo,
+      color: "bg-red-50",
+    },
+    {
+      name: "Spotify",
+      logo: spotifyLogo,
+      color: "bg-green-50",
+    },
   ];
 
   const nextTestimonial = () => {
@@ -331,7 +350,6 @@ const Testimonials = () => {
           </div>
         </div>
 
-        {/* Trusted Companies */}
         <motion.div
           className="trusted-companies"
           initial="hidden"
@@ -346,22 +364,36 @@ const Testimonials = () => {
             {trustedCompanies.map((company, index) => (
               <motion.div
                 key={index}
-                className="company-item"
+                className={`company-item ${company.color} flex flex-col items-center justify-center p-4 rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300`}
                 variants={itemVariants}
-                whileHover={{ y: -3, scale: 1.05 }}
+                whileHover={{
+                  y: -6,
+                  scale: 1.05,
+                  transition: { type: "spring", stiffness: 300, damping: 15 },
+                }}
               >
-                <img
-                  src={company.logo}
-                  alt={company.name}
-                  className="company-logo"
-                  onError={(e) => {
-                    e.target.src =
-                      "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCAxMDAgNDAiPjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iNDAiIGZpbGw9IiMzNzNmNDYiIHJ4PSI4Ii8+PHRleHQgeD0iNTAiIHk9IjI1IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPntjb21wYW55Lm5hbWV9PC90ZXh0Pjwvc3ZnPg==".replace(
-                        "{company.name}",
-                        company.name
-                      );
-                  }}
-                />
+                {/* Company Logo Container */}
+                <div className="company-logo-container w-16 h-16 mb-3 flex items-center justify-center p-2 bg-white rounded-lg shadow-sm">
+                  <img
+                    src={company.logo}
+                    alt={`${company.name} logo`}
+                    className="company-logo w-full h-full object-contain"
+                    loading="lazy"
+                    onError={(e) => {
+                      e.target.src = `data:image/svg+xml;base64,${btoa(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="40" viewBox="0 0 100 40">
+                  <rect width="100" height="40" fill="#373f46" rx="8"/>
+                  <text x="50" y="25" font-family="Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle">${company.name}</text>
+                </svg>
+              `)}`;
+                    }}
+                  />
+                </div>
+
+                {/* Company Name */}
+                <p className="company-name text-sm font-medium text-gray-700">
+                  {company.name}
+                </p>
               </motion.div>
             ))}
           </div>
