@@ -71,42 +71,7 @@ const Services = () => {
       color: "from-green-500 to-emerald-500",
       gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
     },
-    {
-      icon: (
-        <Lottie animationData={adsAnim} loop={true} style={{ height: 48 }} />
-      ),
-      title: "Paid Advertising",
-      description:
-        "Strategic paid social media campaigns to boost your reach, engagement, and conversions.",
-      features: [
-        "Campaign Strategy",
-        "Ad Creative",
-        "Budget Management",
-        "A/B Testing",
-      ],
-      color: "from-orange-500 to-red-500",
-      gradient: "linear-gradient(135deg, #f97316 0%, #ef4444 100%)",
-    },
-    {
-      icon: (
-        <Lottie
-          animationData={communityAnim}
-          loop={true}
-          style={{ height: 48 }}
-        />
-      ),
-      title: "Community Management",
-      description:
-        "Building and nurturing your online community through authentic engagement and relationship building.",
-      features: [
-        "Comment Management",
-        "Influencer Outreach",
-        "Brand Advocacy",
-        "Crisis Communication",
-      ],
-      color: "from-purple-500 to-pink-500",
-      gradient: "linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)",
-    },
+
     {
       icon: (
         <Lottie
