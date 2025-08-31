@@ -1,8 +1,11 @@
+/* Portfolio.css - Enhanced Version */
+
 .portfolio-section {
   padding: 6rem 1rem;
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
   position: relative;
   overflow: hidden;
+  min-height: 100vh;
 }
 
 .portfolio-background {
@@ -20,6 +23,7 @@
   border-radius: 50%;
   filter: blur(60px);
   opacity: 0.2;
+  animation: float 6s ease-in-out infinite;
 }
 
 .portfolio-orb.orb-1 {
@@ -28,6 +32,7 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   top: -100px;
   left: -100px;
+  animation-delay: 0s;
 }
 
 .portfolio-orb.orb-2 {
@@ -36,6 +41,7 @@
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   bottom: -50px;
   right: -50px;
+  animation-delay: 2s;
 }
 
 .portfolio-orb.orb-3 {
@@ -44,6 +50,7 @@
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   top: 50%;
   left: 70%;
+  animation-delay: 4s;
 }
 
 .portfolio-grid-pattern {
@@ -52,8 +59,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px
+    ),
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 40px 40px;
   mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%);
@@ -119,12 +128,100 @@
   margin: 0 auto;
 }
 
+/* Portfolio Controls */
+.portfolio-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  padding: 0.5rem 1rem;
+  backdrop-filter: blur(10px);
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-container svg {
+  color: #9ca3af;
+  margin-right: 0.5rem;
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 0.9rem;
+  width: 100%;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
+}
+
+.clear-search {
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.clear-search:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.sort-container {
+  position: relative;
+}
+
+.sort-select {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  padding: 0.5rem 1rem;
+  color: white;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  padding-right: 2.5rem;
+}
+
+.sort-container::after {
+  content: "▼";
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  font-size: 0.7rem;
+  pointer-events: none;
+}
+
 .portfolio-filters {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .filter-button {
@@ -161,6 +258,13 @@
   transform: translateY(-2px);
 }
 
+.results-count {
+  text-align: center;
+  color: #a78bfa;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
 .portfolio-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -190,6 +294,12 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   cursor: pointer;
+  position: relative;
+}
+
+.portfolio-card.featured {
+  border-color: rgba(255, 215, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
 }
 
 .portfolio-card:hover {
@@ -197,6 +307,23 @@
   box-shadow: 0 16px 48px rgba(102, 126, 234, 0.18);
   background: rgba(40, 40, 60, 0.65);
   border-color: rgba(102, 126, 234, 0.3);
+}
+
+.featured-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.35rem 0.75rem;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #000;
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
 }
 
 .card-image-container {
@@ -302,6 +429,8 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
 }
 
 .card-stats {
@@ -341,50 +470,73 @@
 }
 
 .card-category {
-  padding: 0.25rem 0.75rem;
-  background: rgba(102, 126, 234, 0.15);
-  color: #667eea;
+  padding: 0.35rem 0.75rem;
+  background: rgba(136, 96, 255, 0.15);
+  color: #a78bfa;
   border-radius: 100px;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
+.project-date {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #9ca3af;
+  font-size: 0.8rem;
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #9ca3af;
+}
+
+.no-results svg {
+  margin-bottom: 1rem;
+  color: #6b7280;
+}
+
+.no-results h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #d1d5db;
+}
+
 /* Project Modal */
 .project-modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
   padding: 1rem;
-  overflow-y: auto;
+  z-index: 50;
 }
 
 .modal-content {
-  background: rgba(20, 20, 30, 0.95);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  background: rgba(23, 23, 36, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-radius: 1.5rem;
-  max-width: 900px;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  max-width: 1000px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  position: relative;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
 .modal-close {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 1rem;
+  right: 1rem;
   width: 2.5rem;
   height: 2.5rem;
   background: rgba(255, 255, 255, 0.1);
@@ -396,12 +548,42 @@
   color: white;
   cursor: pointer;
   z-index: 10;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .modal-close:hover {
   background: rgba(255, 255, 255, 0.2);
-  transform: rotate(90deg);
+}
+
+.modal-navigation {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  transform: translateY(-50%);
+  z-index: 5;
+}
+
+.nav-button {
+  width: 3rem;
+  height: 3rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .modal-image {
@@ -420,11 +602,11 @@
 }
 
 .modal-header {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .modal-header h2 {
-  font-size: 2rem;
+  font-size: 1.875rem;
   font-weight: 700;
   color: white;
   margin-bottom: 0.5rem;
@@ -439,7 +621,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   padding: 1.5rem;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 1rem;
@@ -452,7 +634,7 @@
 }
 
 .detail-label {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: #9ca3af;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -465,28 +647,28 @@
 
 .modal-stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .modal-stat {
   text-align: center;
-  padding: 1.5rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 1rem;
+  padding: 1rem;
+  background: rgba(136, 96, 255, 0.15);
+  border-radius: 0.75rem;
 }
 
 .modal-stat-value {
   font-size: 1.5rem;
   font-weight: 700;
   color: #a855f7;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .modal-stat-label {
   font-size: 0.75rem;
-  color: #9ca3af;
+  color: #a78bfa;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -507,13 +689,12 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 1rem 2rem;
-  border-radius: 0.75rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  padding: 0.75rem 1.5rem;
+  border-radius: 100px;
+  font-weight: 500;
   cursor: pointer;
+  transition: all 0.3s ease;
   border: none;
-  font-size: 1rem;
 }
 
 .btn-primary {
@@ -523,48 +704,44 @@
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
 }
 
 .btn-secondary {
-  background: transparent;
-  color: #667eea;
-  border: 2px solid #667eea;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .btn-secondary:hover {
-  background: #667eea;
-  color: white;
+  background: rgba(255, 255, 255, 0.2);
 }
 
-/* CTA Section */
+/* Portfolio CTA */
 .portfolio-cta {
-  text-align: center;
-  margin-top: 4rem;
-}
-
-.cta-content {
   background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-  backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1.5rem;
   padding: 3rem 2rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.cta-content {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .cta-title {
-  font-size: 2rem;
+  font-size: 1.875rem;
   font-weight: 700;
   color: white;
   margin-bottom: 1rem;
 }
 
 .cta-description {
-  font-size: 1.125rem;
   color: #d1d5db;
   margin-bottom: 2rem;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
   line-height: 1.6;
 }
 
@@ -575,21 +752,29 @@
   padding: 1rem 2rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  border-radius: 0.75rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  cursor: pointer;
   border: none;
-  font-size: 1rem;
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  border-radius: 100px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .cta-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
 }
 
-/* Responsive Adjustments */
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .portfolio-section {
     padding: 4rem 1rem;
@@ -599,70 +784,33 @@
     font-size: 2rem;
   }
   
-  .section-description {
-    font-size: 1rem;
+  .portfolio-controls {
+    flex-direction: column;
+    align-items: stretch;
   }
   
-  .portfolio-filters {
-    gap: 0.5rem;
-  }
-  
-  .filter-button {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-  }
-  
-  .portfolio-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .modal-content {
-    margin: 1rem;
-  }
-  
-  .modal-body {
-    padding: 1.5rem;
+  .search-container {
+    max-width: 100%;
   }
   
   .modal-details {
     grid-template-columns: 1fr;
   }
   
-  .modal-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
   .modal-actions {
     flex-direction: column;
   }
   
-  .cta-title {
-    font-size: 1.75rem;
+  .modal-content {
+    max-height: 95vh;
   }
   
-  .cta-description {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .section-title {
-    font-size: 1.75rem;
+  .modal-navigation {
+    padding: 0 0.5rem;
   }
   
-  .filter-button span {
-    display: none;
-  }
-  
-  .filter-button {
-    padding: 0.75rem;
-  }
-  
-  .card-stats {
-    grid-template-columns: 1fr;
-  }
-  
-  .modal-stats {
-    grid-template-columns: 1fr;
+  .nav-button {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }

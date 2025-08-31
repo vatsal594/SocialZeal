@@ -17,6 +17,20 @@ import "./Hero.css";
 const Hero = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
 
   const stats = [
     {
@@ -70,36 +84,40 @@ const Hero = () => {
         {/* Grid Pattern */}
         <div className="hero-grid"></div>
 
-        {/* Floating Elements */}
-        <motion.div
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="hero-floating-element hero-floating-1"
-        ></motion.div>
-        <motion.div
-          animate={{ y: [0, 20, 0] }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-          className="hero-floating-element hero-floating-2"
-        ></motion.div>
-        <motion.div
-          animate={{ y: [0, -15, 0] }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 4,
-          }}
-          className="hero-floating-element hero-floating-3"
-        ></motion.div>
-        
-        {/* Particle Effects */}
+        {/* Floating Elements - Reduced on mobile for performance */}
+        {!isMobile && (
+          <>
+            <motion.div
+              animate={{ y: [0, -20, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="hero-floating-element hero-floating-1"
+            ></motion.div>
+            <motion.div
+              animate={{ y: [0, 20, 0] }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 2,
+              }}
+              className="hero-floating-element hero-floating-2"
+            ></motion.div>
+            <motion.div
+              animate={{ y: [0, -15, 0] }}
+              transition={{
+                duration: 7,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 4,
+              }}
+              className="hero-floating-element hero-floating-3"
+            ></motion.div>
+          </>
+        )}
+
+        {/* Particle Effects - Reduced on mobile for performance */}
         <div className="particles">
-          {[...Array(30)].map((_, i) => (
+          {[...Array(isMobile ? 15 : 30)].map((_, i) => (
             <motion.div
               key={i}
               className="particle"
@@ -127,27 +145,22 @@ const Hero = () => {
 
       <div className="container hero-content">
         <div className="hero-grid-layout">
-          {/* Left Content */}
+          {/* Main Content */}
           <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="hero-left"
+            className="hero-main-content"
           >
-            {/* Badge */}
+            {/* Premium Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="hero-badge"
+              className="hero-premium-badge"
             >
-              <Sparkles className="hero-badge-icon" />
-              <span>Leading Social Media Agency</span>
-              <motion.div 
-                className="badge-highlight"
-                animate={{ x: [-10, 100, -10] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              />
+              <Sparkles size={16} />
+              <span>Premium Social Media Solutions</span>
             </motion.div>
 
             {/* Main Heading */}
@@ -157,9 +170,8 @@ const Hero = () => {
               transition={{ delay: 0.3 }}
               className="hero-title"
             >
-              Transform Your{" "}
-              <span className="text-gradient-primary">Social Media</span>{" "}
-              Presence
+              Elevate Your <span className="text-gradient-primary">Brand</span>{" "}
+              with Strategic Social Media Excellence
             </motion.h1>
 
             {/* Subtitle */}
@@ -169,9 +181,9 @@ const Hero = () => {
               transition={{ delay: 0.4 }}
               className="hero-subtitle"
             >
-              We help brands grow their online presence with strategic social
-              media management, engaging content creation, and data-driven
-              digital marketing solutions that deliver real results.
+              We craft data-driven social media strategies that drive engagement, 
+              increase followers, and convert audiences into loyal customers. 
+              Experience the transformation with our premium services.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -182,7 +194,7 @@ const Hero = () => {
               className="hero-buttons"
             >
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: isMobile ? 1 : 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="btn btn-primary hero-cta-btn"
                 onClick={() =>
@@ -197,7 +209,7 @@ const Hero = () => {
               </motion.button>
 
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: isMobile ? 1 : 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="btn btn-secondary hero-cta-btn"
                 onClick={handleWatchDemo}
@@ -214,27 +226,65 @@ const Hero = () => {
               </motion.button>
             </motion.div>
 
+            {/* Stats Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+              className="hero-stats-section"
+            >
+              <div className="hero-stats-grid">
+                {stats.map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 + index * 0.1 }}
+                    className="hero-stat-card"
+                    whileHover={{
+                      y: isMobile ? 0 : -5,
+                      transition: { duration: 0.2 },
+                    }}
+                  >
+                    <div className="hero-stat-icon">
+                      <div
+                        className={`hero-stat-icon-bg bg-gradient-to-r ${stat.color}`}
+                      >
+                        <stat.icon className="text-white" size={28} />
+                      </div>
+                    </div>
+                    <div className="hero-stat-value">{stat.value}</div>
+                    <div className="hero-stat-label">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
             {/* Trust Indicators */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.9 }}
               className="hero-trust-indicators"
             >
               <div className="hero-avatars">
                 <div className="hero-avatar-group">
                   {[...Array(4)].map((_, i) => (
-                    <motion.div 
-                      key={i} 
+                    <motion.div
+                      key={i}
                       className="hero-avatar"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                      whileHover={{ scale: isMobile ? 1 : 1.1 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 10,
+                      }}
                     ></motion.div>
                   ))}
                 </div>
                 <span className="hero-trust-text">Trusted by 200+ brands</span>
               </div>
-              
+
               <div className="hero-reviews">
                 <div className="stars">
                   {[...Array(5)].map((_, i) => (
@@ -245,103 +295,25 @@ const Hero = () => {
               </div>
             </motion.div>
           </motion.div>
-
-          {/* Right Content - Stats & Visual */}
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="hero-right"
-          >
-            {/* Stats Grid */}
-            <div className="hero-stats-grid">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.7 + index * 0.1 }}
-                  className="hero-stat-card"
-                  whileHover={{ 
-                    y: -5,
-                    transition: { duration: 0.2 }
-                  }}
-                >
-                  <div className="hero-stat-icon">
-                    <div
-                      className={`hero-stat-icon-bg bg-gradient-to-r ${stat.color}`}
-                    >
-                      <stat.icon className="text-white" size={28} />
-                    </div>
-                  </div>
-                  <div className="hero-stat-value">{stat.value}</div>
-                  <div className="hero-stat-label">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Featured Card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1 }}
-              className="hero-featured-card"
-              whileHover={{ y: -5 }}
-            >
-              <div className="hero-featured-header">
-                <div className="hero-featured-avatar">
-                  <img 
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
-                    alt="Sarah Johnson" 
-                  />
-                </div>
-                <div className="hero-featured-info">
-                  <div className="hero-featured-name">Sarah Johnson</div>
-                  <div className="hero-featured-role">Marketing Director</div>
-                </div>
-                <div className="hero-featured-rating">
-                  <span className="hero-featured-stars">★★★★★</span>
-                </div>
-              </div>
-              <p className="hero-featured-text">
-                "SocialZeal transformed our social media presence completely. We
-                saw a 300% increase in engagement!"
-              </p>
-              <div className="hero-featured-stats">
-                <div className="hero-featured-stat">
-                  <Zap size={16} className="stat-icon" />
-                  <span className="hero-featured-stat-value">+300%</span>
-                  <span className="hero-featured-stat-label">Engagement</span>
-                </div>
-                <div className="hero-featured-stat">
-                  <Users size={16} className="stat-icon" />
-                  <span className="hero-featured-stat-value">+500%</span>
-                  <span className="hero-featured-stat-label">Followers</span>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
         </div>
-        
-        {/* Scroll Indicator */}
-        <motion.div 
-          className="hero-scroll-indicator"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          onClick={scrollToNext}
-        >
-          <span>Scroll Down</span>
-          <div className="hero-scroll-button">
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="hero-scroll-dot"
-            />
-          </div>
-          <ChevronDown size={20} />
-        </motion.div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div 
+        className="hero-scroll-indicator"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        onClick={scrollToNext}
+      >
+        <span>Explore More</span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <ChevronDown size={24} />
+        </motion.div>
+      </motion.div>
     </motion.section>
   );
 };
