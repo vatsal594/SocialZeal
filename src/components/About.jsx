@@ -25,28 +25,28 @@ const About = () => {
       title: "Passion",
       description:
         "We're passionate about helping brands succeed in the digital world.",
-      color: "from-red-500 to-pink-500",
+      color: "from-purple-500 to-indigo-500",
     },
     {
       icon: Target,
       title: "Results",
       description:
         "We focus on delivering measurable results that drive business growth.",
-      color: "from-blue-500 to-cyan-500",
+      color: "from-sky-500 to-blue-600",
     },
     {
       icon: Users,
       title: "Collaboration",
       description:
         "We work closely with our clients to ensure their vision becomes reality.",
-      color: "from-green-500 to-emerald-500",
+      color: "from-indigo-500 to-blue-500",
     },
     {
       icon: Zap,
       title: "Innovation",
       description:
         "We stay ahead of trends to provide cutting-edge social media solutions.",
-      color: "from-yellow-500 to-amber-500",
+      color: "from-fuchsia-500 to-purple-600",
     },
   ];
 
@@ -65,12 +65,11 @@ const About = () => {
   ];
 
   const features = [
-    "Strategic social media planning and execution",
-    "Creative content creation and design",
-    "Community management and engagement",
-    "Analytics and performance reporting",
-    "Influencer partnership programs",
-    "Social media advertising campaigns",
+    "Content creation (posts, graphics, reels, shorts)",
+    "Video editing & shoots",
+    "Script writing / copywriting",
+    "Social media account management",
+    "Brand identity & design (logos, templates, brand kit)",
   ];
 
   const containerVariants = {
@@ -138,20 +137,22 @@ const About = () => {
           </motion.div>
 
           <motion.h2 variants={itemVariants} className="section-title">
-            We Transform Your <span className="text-gradient">Social Presence</span> Into 
+            We Transform Your{" "}
+            <span className="text-gradient">Social Presence</span> Into
             Meaningful Connections
           </motion.h2>
 
           <motion.p variants={itemVariants} className="section-description">
-            Founded in 2019, SocialZeal has been at the forefront of digital marketing 
-            innovation. We combine creativity with data-driven strategies to help brands 
-            build meaningful connections with their audiences across all social platforms.
+            Founded in 2025, SocialZeal has been at the forefront of digital
+            marketing innovation. We combine creativity with data-driven
+            strategies to help brands build meaningful connections with their
+            audiences across all social platforms.
           </motion.p>
         </motion.div>
 
         <div className="about-content">
           {/* Left Column - Stats & Features */}
-          <motion.div 
+          <motion.div
             className="about-left"
             variants={containerVariants}
             initial="hidden"
@@ -177,8 +178,8 @@ const About = () => {
             <motion.div variants={itemVariants} className="features-list">
               <h3 className="features-title">Our Services</h3>
               {features.map((feature, index) => (
-                <motion.div 
-                  key={index} 
+                <motion.div
+                  key={index}
                   className="feature-item"
                   variants={itemVariants}
                   whileHover={{ x: 5 }}
@@ -192,7 +193,7 @@ const About = () => {
           </motion.div>
 
           {/* Right Column - Values & Team */}
-          <motion.div 
+          <motion.div
             className="about-right"
             variants={containerVariants}
             initial="hidden"
@@ -204,9 +205,9 @@ const About = () => {
                   key={index}
                   className={`value-card ${value.color}`}
                   variants={cardVariants}
-                  whileHover={{ 
-                    y: -8, 
-                    transition: { duration: 0.3 } 
+                  whileHover={{
+                    y: -8,
+                    transition: { duration: 0.3 },
                   }}
                 >
                   <div className="value-icon-wrapper">
@@ -229,10 +230,11 @@ const About = () => {
                 </div>
               </div>
               <p className="team-description">
-                Our diverse team of social media experts, creative designers, and 
-                strategic thinkers work together to deliver exceptional results for our clients.
+                Our diverse team of social media experts, creative designers,
+                and strategic thinkers work together to deliver exceptional
+                results for our clients.
               </p>
-              
+
               <div className="team-stats">
                 {teamStats.map((stat, index) => (
                   <div key={index} className="team-stat">
