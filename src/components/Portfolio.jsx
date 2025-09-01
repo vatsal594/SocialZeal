@@ -45,8 +45,8 @@ const Portfolio = () => {
   const projects = [
     {
       id: 1,
-      category: "social",
-      title: "TechStart Social Media Campaign",
+      category: "Social",
+      title: "Corporate Shoot",
       description:
         "Complete social media transformation for a tech startup, resulting in 300% follower growth and increased engagement across all platforms. We implemented a comprehensive content strategy with A/B testing and data-driven optimizations.",
       image:

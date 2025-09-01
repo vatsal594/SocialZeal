@@ -32,7 +32,7 @@ const Testimonials = () => {
       position: "CEO, TechStart",
       company: "TechStart Inc.",
       avatar:
-        "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       rating: 5,
       text: "SocialZeal transformed our social media presence completely. We saw a 300% increase in followers and 5x more engagement. Their strategic approach and creative content have been game-changing for our brand.",
       stats: { followers: "+300%", engagement: "+500%", reach: "+400%" },

@@ -17,6 +17,7 @@ import {
   Sparkles,
   ChevronRight,
   Loader2,
+  TrendingUp,
 } from "lucide-react";
 import "./Contact.css";
 
@@ -123,31 +124,41 @@ const Contact = () => {
     {
       name: "Social Media",
       icon: Megaphone,
-      description: "Complete management of your social presence",
+      description: "End-to-end management of your social media presence",
     },
     {
       name: "Content Creation",
       icon: Palette,
-      description: "Engaging content tailored to your brand",
+      description: "High-quality posts, graphics, and creative brand content",
     },
     {
-      name: "Paid Ads",
+      name: "Video Editing",
       icon: BarChart3,
-      description: "Strategic ad campaigns for maximum ROI",
+      description: "Professional editing for ads, reels, and brand videos",
     },
     {
-      name: "Analytics",
+      name: "Analytics & Reporting",
+      icon: TrendingUp,
+      description: "Data-driven insights to track and optimize performance",
+    },
+    {
+      name: "Brand Strategy",
+      icon: Sparkles,
+      description: "Comprehensive strategy to strengthen brand identity",
+    },
+    {
+      name: "Other's",
       icon: Target,
-      description: "Data-driven insights for your strategy",
+      description: "Custom solutions tailored to your unique business needs",
     },
   ];
 
   const budgets = [
-    "$500 - $1,000",
-    "$1,000 - $2,500",
-    "$2,500 - $5,000",
-    "$5,000 - $10,000",
-    "$10,000+",
+    "₹1,000 - ₹5,000  ($12 - $60)",
+    "₹5,000 - ₹10,000  ($60 - $120)",
+    "₹10,000 - ₹25,000  ($120 - $300)",
+    "₹25,000 - ₹50,000  ($300 - $600)",
+    "₹50,000+  ($600+)",
   ];
 
   const timelines = [
@@ -356,7 +367,7 @@ const Contact = () => {
                         </div>
 
                         <div className="contact-form-group">
-                          <label className="contact-form-label">Company</label>
+                          <label className="contact-form-label">Company / Brand</label>
                           <input
                             type="text"
                             name="company"

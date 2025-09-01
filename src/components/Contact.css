@@ -698,3 +698,83 @@
     align-items: center;
   }
 }
+/* Style the select dropdowns */
+.contact-form select.contact-form-input {
+  background: rgba(30, 30, 50, 0.9); /* dark background for contrast */
+  color: #ffffff; /* white text */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  appearance: none; /* remove default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><polygon points='0,0 16,0 8,8' fill='white'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+}
+
+/* Hover & focus styles */
+.contact-form select.contact-form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Option styling (works in most modern browsers) */
+.contact-form select.contact-form-input option {
+  background-color: rgba(30, 30, 50, 0.95);
+  color: #ffffff;
+  padding: 8px;
+}
+
+/* Common style for all input fields, textarea, and select */
+.contact-form-input,
+.contact-form-textarea,
+.contact-form select.contact-form-input {
+  background: rgba(30, 30, 50, 0.9); /* Dark semi-transparent shade */
+  color: #ffffff; /* White text */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  backdrop-filter: blur(10px);
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  appearance: none; /* Remove default arrow for select */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Placeholder color */
+.contact-form-input::placeholder,
+.contact-form-textarea::placeholder,
+.contact-form select.contact-form-input option:first-child {
+  color: #c0c0c0; /* Light gray for readability */
+}
+
+/* Focus state */
+.contact-form-input:focus,
+.contact-form-textarea:focus,
+.contact-form select.contact-form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+  background: rgba(30, 30, 50, 0.95);
+}
+
+/* Options for dropdowns */
+.contact-form select.contact-form-input option {
+  background-color: rgba(30, 30, 50, 0.95);
+  color: #ffffff;
+  padding: 8px;
+}
+
+/* Custom arrow for select dropdown */
+.contact-form select.contact-form-input {
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><polygon points='0,0 16,0 8,8' fill='white'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+}

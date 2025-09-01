@@ -19,17 +19,17 @@ const Services = () => {
       icon: (
         <Lottie animationData={socialAnim} loop={true} style={{ height: 48 }} />
       ),
-      title: "Social Media Management",
+      title: "Content Creation",
       description:
-        "Complete management of your social media presence across all platforms with strategic content planning and community engagement.",
+        "Creation of engaging posts, graphics, reels, and shorts tailored to your brand and audience.",
       features: [
-        "Content Strategy",
-        "Community Management",
-        "Analytics & Reporting",
-        "Crisis Management",
+        "Social Media Posts",
+        "Graphics & Illustrations",
+        "Reels & Shorts",
+        "Engagement-focused Design",
       ],
-      color: "from-pink-500 to-purple-500",
-      gradient: "linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)",
+      color: "from-blue-500 to-purple-500",
+      gradient: "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)",
     },
     {
       icon: (
@@ -39,17 +39,17 @@ const Services = () => {
           style={{ height: 48 }}
         />
       ),
-      title: "Content Creation",
+      title: "Video Editing & Shoots",
       description:
-        "Professional content creation including graphics, videos, and copywriting that resonates with your target audience.",
+        "High-quality video production and editing for brand storytelling and campaigns.",
       features: [
-        "Visual Design",
-        "Video Production",
-        "Copywriting",
-        "Brand Consistency",
+        "Professional Shoots",
+        "Cinematic Editing",
+        "Reels & Ads",
+        "Event Coverage",
       ],
-      color: "from-blue-500 to-cyan-500",
-      gradient: "linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%)",
+      color: "from-cyan-500 to-blue-500",
+      gradient: "linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)",
     },
     {
       icon: (
@@ -59,17 +59,12 @@ const Services = () => {
           style={{ height: 48 }}
         />
       ),
-      title: "Analytics & Reporting",
+      title: "Script Writing / Copywriting",
       description:
-        "Data-driven insights and comprehensive reporting to track your social media performance and ROI.",
-      features: [
-        "Performance Tracking",
-        "ROI Analysis",
-        "Competitor Analysis",
-        "Custom Reports",
-      ],
-      color: "from-green-500 to-emerald-500",
-      gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+        "Powerful scripts and copy that grab attention and drive action across platforms.",
+      features: ["Ad Scripts", "Captivating Copy", "Storytelling", "Messaging"],
+      color: "from-indigo-500 to-purple-500",
+      gradient: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
     },
 
     {
@@ -80,17 +75,17 @@ const Services = () => {
           style={{ height: 48 }}
         />
       ),
-      title: "Social Media Strategy",
+      title: "Social Media Account Management",
       description:
-        "Comprehensive social media strategy development aligned with your business goals and target audience.",
+        "Full management of your social accounts with posting, monitoring, and audience engagement.",
       features: [
-        "Audience Research",
-        "Platform Strategy",
-        "Content Calendar",
-        "Growth Planning",
+        "Content Scheduling",
+        "Community Engagement",
+        "Performance Tracking",
+        "Growth Strategy",
       ],
-      color: "from-yellow-500 to-orange-500",
-      gradient: "linear-gradient(135deg, #eab308 0%, #f97316 100%)",
+      color: "from-purple-500 to-cyan-500",
+      gradient: "linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%)",
     },
   ];
 
