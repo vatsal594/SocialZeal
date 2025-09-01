@@ -60,8 +60,8 @@ const Footer = () => {
 
   const contactInfo = [
     { icon: Mail, text: "hello@socialzeal.com" },
-    { icon: Phone, text: "+1 (555) 123-4567" },
-    { icon: MapPin, text: "123 Digital Street, Tech City" },
+    { icon: Phone, text: "+91 9637496522" },
+    { icon: MapPin, text: "Mumbai, Maharashtra, India" },
   ];
 
   return (

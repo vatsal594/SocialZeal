@@ -10,6 +10,8 @@
     "start": "vite"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "emailjs": "^4.0.3",
     "framer-motion": "^10.0.0",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.263.1",

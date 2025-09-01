@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import emailjs from "@emailjs/browser";
 import {
   Mail,
   Phone,
@@ -18,6 +19,8 @@ import {
   ChevronRight,
   Loader2,
   TrendingUp,
+  MessageCircle,
+  Calendar,
 } from "lucide-react";
 import "./Contact.css";
 
@@ -39,6 +42,11 @@ const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedService, setSelectedService] = useState(null);
+
+  // Initialize EmailJS (replace with your actual credentials)
+  const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+  const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+  const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -65,12 +73,48 @@ const Contact = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      // Send email using EmailJS
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY
+      );
 
-    console.log("Form submitted:", formData);
-    setIsSubmitted(true);
-    setIsLoading(false);
+      console.log("Form submitted:", formData);
+      setIsSubmitted(true);
+
+      // Optional: Save to Google Sheets or Airtable here
+    } catch (error) {
+      console.error("Failed to send message:", error);
+      alert("There was an error sending your message. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const generateWhatsAppMessage = () => {
+    const { name, service, budget } = formData;
+    return `Hi! My name is ${name}. I'm interested in ${service} with a budget of ${
+      budget || "not specified"
+    }.`;
+  };
+
+  const openWhatsApp = () => {
+    const message = encodeURIComponent("Hi, I want to discuss my project!");
+    window.open(`https://wa.me/919637496522?text=${message}`, "_blank");
+  };
+
+  const scheduleCall = () => {
+    // Replace with your actual Calendly link
+    window.open("https://calendly.com/your-username", "_blank");
+  };
+
+  const resetForm = () => {
+    setIsSubmitted(false);
+    setCurrentStep(1);
+    setSelectedService(null);
     setFormData({
       name: "",
       email: "",
@@ -80,13 +124,6 @@ const Contact = () => {
       timeline: "",
       message: "",
     });
-
-    // Reset after 5 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setCurrentStep(1);
-      setSelectedService(null);
-    }, 5000);
   };
 
   const contactInfo = [
@@ -100,16 +137,9 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Call Us",
-      details: "+1 (555) 123-4567",
+      details: "+91 9637496522",
       description: "Mon-Fri from 9am to 6pm",
       action: "tel:+15551234567",
-    },
-    {
-      icon: MapPin,
-      title: "Visit Us",
-      details: "123 Digital Street, Tech City",
-      description: "Schedule a meeting at our office",
-      action: "#",
     },
     {
       icon: Clock,
@@ -276,6 +306,32 @@ const Contact = () => {
                     Thank you for reaching out. We'll contact you within 24
                     hours.
                   </p>
+
+                  <div className="success-actions">
+                    <motion.button
+                      onClick={openWhatsApp}
+                      className="whatsapp-button"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <MessageCircle size={18} />
+                      Message on WhatsApp
+                    </motion.button>
+
+                    <motion.button
+                      onClick={scheduleCall}
+                      className="calendly-button"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Calendar size={18} />
+                      Schedule a Call
+                    </motion.button>
+
+                    <button onClick={resetForm} className="back-to-form">
+                      Back to Form
+                    </button>
+                  </div>
                 </motion.div>
               ) : (
                 <form
@@ -367,7 +423,9 @@ const Contact = () => {
                         </div>
 
                         <div className="contact-form-group">
-                          <label className="contact-form-label">Company / Brand</label>
+                          <label className="contact-form-label">
+                            Company / Brand
+                          </label>
                           <input
                             type="text"
                             name="company"
@@ -568,6 +626,35 @@ const Contact = () => {
                     </div>
                   </motion.a>
                 ))}
+              </motion.div>
+
+              {/* WhatsApp Quick Contact */}
+              {/* WhatsApp Quick Contact - Enhanced Styling */}
+              <motion.div
+                variants={itemVariants}
+                className="whatsapp-quick-container"
+              >
+                <div className="whatsapp-header">
+                  <div className="whatsapp-icon-wrapper">
+                    <MessageCircle size={20} />
+                  </div>
+                  <h4>Quick WhatsApp Chat</h4>
+                </div>
+
+                <p className="whatsapp-description">
+                  Prefer instant messaging? Chat with us directly on WhatsApp
+                  for faster responses.
+                </p>
+
+                <motion.button
+                  onClick={openWhatsApp}
+                  className="whatsapp-button-enhanced"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <MessageCircle size={18} />
+                  Start Chat on WhatsApp
+                </motion.button>
               </motion.div>
             </div>
           </motion.div>
