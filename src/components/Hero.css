@@ -194,8 +194,14 @@
 
 .text-gradient-primary {
   background: linear-gradient(to right, #a855f7, #ec4899);
+
+  /* Vendor prefixed (needed for Chrome, Safari, Opera, Edge) */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
+  /* Standard property for compatibility */
+  background-clip: text;
+  color: transparent; /* Fallback so the gradient shows properly */
 }
 
 .hero-subtitle {
