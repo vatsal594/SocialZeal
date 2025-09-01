@@ -181,7 +181,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   margin-bottom: 2rem;
-  color: #a855f7;
+  color: #ffffff;
 }
 
 .hero-title {
@@ -374,13 +374,23 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  background: linear-gradient(to right, #a855f7, #ec4899);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 2px solid #111827;
   margin-left: -0.75rem;
+  background: #ffffffdf;
 }
 
 .hero-avatar:first-child {
   margin-left: 0;
+}
+
+.brand-logo {
+  width: 70%;
+  height: 70%;
+  object-fit: contain; /* ✅ keeps aspect ratio */
 }
 
 .hero-trust-text {

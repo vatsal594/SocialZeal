@@ -13,6 +13,10 @@ import {
   ChevronDown,
 } from "lucide-react";
 import "./Hero.css";
+import google from "../assets/google.png";
+import instagram from "../assets/instagram.png";
+import spotify from "../assets/spotify.png";
+import youtube from "../assets/youtube.png";
 
 const Hero = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -181,9 +185,10 @@ const Hero = () => {
               transition={{ delay: 0.4 }}
               className="hero-subtitle"
             >
-              We craft data-driven social media strategies that drive engagement, 
-              increase followers, and convert audiences into loyal customers. 
-              Experience the transformation with our premium services.
+              We craft data-driven social media strategies that drive
+              engagement, increase followers, and convert audiences into loyal
+              customers. Experience the transformation with our premium
+              services.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -269,7 +274,7 @@ const Hero = () => {
             >
               <div className="hero-avatars">
                 <div className="hero-avatar-group">
-                  {[...Array(4)].map((_, i) => (
+                  {[google, instagram, spotify, youtube].map((logo, i) => (
                     <motion.div
                       key={i}
                       className="hero-avatar"
@@ -279,41 +284,21 @@ const Hero = () => {
                         stiffness: 400,
                         damping: 10,
                       }}
-                    ></motion.div>
+                    >
+                      <img
+                        src={logo}
+                        alt={`brand-${i}`}
+                        className="brand-logo"
+                      />
+                    </motion.div>
                   ))}
                 </div>
                 <span className="hero-trust-text">Trusted by 200+ brands</span>
-              </div>
-
-              <div className="hero-reviews">
-                <div className="stars">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={16} fill="currentColor" />
-                  ))}
-                </div>
-                <span>4.9/5 from 200+ reviews</span>
               </div>
             </motion.div>
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div 
-        className="hero-scroll-indicator"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        onClick={scrollToNext}
-      >
-        <span>Explore More</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <ChevronDown size={24} />
-        </motion.div>
-      </motion.div>
     </motion.section>
   );
 };
